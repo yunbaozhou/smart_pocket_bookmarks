@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"%3E%3Crect width="96" height="96" rx="22" fill="%230a84ff"/%3E%3Cpath d="M30 24h36a6 6 0 0 1 6 6v44L48 61 24 74V30a6 6 0 0 1 6-6z" fill="white"/%3E%3Ccircle cx="60" cy="37" r="8" fill="%230a84ff"/%3E%3C/svg%3E' />
+    <title>Pocket Bookmarks | Private bookmark manager and public sharing home</title>
+    <meta
+      name="description"
+      content="Pocket Bookmarks helps you import, organize, search, tag, and privately share bookmarks across browsers with a clean personal workspace."
+    />
+    <meta name="robots" content="index,follow" />
+    <meta property="og:title" content="Pocket Bookmarks" />
+    <meta
+      property="og:description"
+      content="A calm bookmark system for collecting links, organizing knowledge, checking broken links, and sharing selected bookmark collections."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="keywords" content="bookmark manager, browser bookmarks, link organizer, private bookmarks, public bookmark sharing, bookmark tags" />
+    <meta name="author" content="Pocket Bookmarks" />
+    <meta name="application-name" content="Pocket Bookmarks" />
+    <meta name="geo.region" content="CN" />
+    <meta name="geo.placename" content="China" />
+    <link rel="canonical" href="https://navfinder.cn/" />
+    <link rel="alternate" hreflang="en" href="https://navfinder.cn/?lang=en" />
+    <link rel="alternate" hreflang="zh-CN" href="https://navfinder.cn/?lang=zh" />
+    <link rel="alternate" hreflang="x-default" href="https://navfinder.cn/" />
+    <meta property="og:site_name" content="Pocket Bookmarks" />
+    <meta property="og:url" content="https://navfinder.cn/" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="zh_CN" />
+    <meta property="og:image" content="https://navfinder.cn/static/imgs/logo.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Pocket Bookmarks | Private bookmark manager and public sharing home" />
+    <meta name="twitter:description" content="Import browser bookmarks, organize links with categories and tags, search fast, check broken links, and share selected public collections." />
+    <meta name="twitter:image" content="https://navfinder.cn/static/imgs/logo.png" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://navfinder.cn/#organization",
+            "name": "Pocket Bookmarks",
+            "url": "https://navfinder.cn/",
+            "logo": "https://navfinder.cn/static/imgs/logo.png"
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://navfinder.cn/#app",
+            "name": "Pocket Bookmarks",
+            "url": "https://navfinder.cn/",
+            "applicationCategory": "ProductivityApplication",
+            "operatingSystem": "Web, Chrome, Edge",
+            "inLanguage": ["en", "zh-CN"],
+            "description": "A private bookmark manager for importing, organizing, searching, checking, and sharing selected bookmark collections.",
+            "keywords": "bookmark manager, browser bookmarks, link organizer, private bookmarks, public bookmark sharing"
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://navfinder.cn/#faq",
+            "inLanguage": ["en", "zh-CN"],
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is Pocket Bookmarks?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Pocket Bookmarks is a private bookmark manager for saving web pages, importing browser bookmarks, organizing links with categories and tags, searching quickly, and sharing selected public collections."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+    <style>
+      :root {
+        color-scheme: light;
+        --page: #f5f7fb;
+        --surface: rgba(255, 255, 255, 0.86);
+        --surface-strong: #ffffff;
+        --ink: #111827;
+        --muted: #5d6677;
+        --soft: #dce3ee;
+        --accent: #0a84ff;
+        --accent-dark: #0067d6;
+        --shadow: 0 28px 90px rgba(55, 74, 105, 0.18);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body.landing-page {
+        margin: 0;
+        min-width: 320px;
+        background: linear-gradient(180deg, #fafdff 0%, var(--page) 48%, #ffffff 100%);
+        color: var(--ink);
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Arial, sans-serif;
+        letter-spacing: 0;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .landing-header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 18px 0;
+        backdrop-filter: blur(22px);
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 15px;
+        font-weight: 700;
+      }
+
+      .brand img {
+        width: 32px;
+        height: 32px;
+        border-radius: 9px;
+      }
+
+      .landing-nav {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px;
+        border: 1px solid rgba(180, 191, 209, 0.55);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.72);
+        box-shadow: 0 12px 40px rgba(70, 83, 107, 0.08);
+      }
+
+      .landing-nav a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 36px;
+        padding: 0 14px;
+        border-radius: 999px;
+        color: #3d4656;
+        font-size: 14px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .landing-nav a:hover {
+        background: #f0f4fa;
+      }
+
+      .landing-nav .nav-login {
+        background: var(--ink);
+        color: #fff;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 0.92fr) minmax(420px, 1.08fr);
+        align-items: center;
+        gap: clamp(36px, 6vw, 84px);
+        width: min(1180px, calc(100% - 40px));
+        min-height: calc(100dvh - 96px);
+        margin: 0 auto;
+        padding: 58px 0 76px;
+      }
+
+      .hero-copy {
+        max-width: 620px;
+      }
+
+      .eyebrow {
+        margin: 0 0 18px;
+        color: var(--accent-dark);
+        font-size: 13px;
+        font-weight: 760;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        margin-bottom: 24px;
+        font-size: clamp(52px, 7vw, 92px);
+        line-height: 0.96;
+        font-weight: 760;
+      }
+
+      .hero-text {
+        max-width: 560px;
+        margin-bottom: 34px;
+        color: var(--muted);
+        font-size: clamp(18px, 2vw, 21px);
+        line-height: 1.58;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .primary-action,
+      .secondary-action,
+      .policy-links a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 46px;
+        padding: 0 22px;
+        border-radius: 999px;
+        font-size: 15px;
+        font-weight: 700;
+      }
+
+      .primary-action {
+        background: var(--accent);
+        color: #fff;
+        box-shadow: 0 16px 38px rgba(10, 132, 255, 0.24);
+      }
+
+      .primary-action:hover {
+        background: var(--accent-dark);
+      }
+
+      .secondary-action,
+      .policy-links a {
+        border: 1px solid var(--soft);
+        background: rgba(255, 255, 255, 0.74);
+        color: #222b3a;
+      }
+
+      .product-stage {
+        overflow: hidden;
+        border: 1px solid rgba(190, 201, 218, 0.72);
+        border-radius: 28px;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(28px);
+      }
+
+      .window-bar {
+        display: flex;
+        gap: 8px;
+        padding: 18px 20px;
+        border-bottom: 1px solid rgba(206, 214, 226, 0.72);
+      }
+
+      .window-bar span {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background: #c8d1de;
+      }
+
+      .window-bar span:first-child {
+        background: #ff6b5f;
+      }
+
+      .window-bar span:nth-child(2) {
+        background: #ffbd2f;
+      }
+
+      .window-bar span:nth-child(3) {
+        background: #28c840;
+      }
+
+      .workspace-preview {
+        display: grid;
+        grid-template-columns: 142px minmax(0, 1fr);
+        min-height: 470px;
+      }
+
+      .preview-sidebar {
+        padding: 24px 18px;
+        border-right: 1px solid rgba(206, 214, 226, 0.72);
+        background: rgba(245, 248, 252, 0.86);
+      }
+
+      .sidebar-pill,
+      .preview-search {
+        height: 16px;
+        border-radius: 999px;
+        background: #dfe6f0;
+      }
+
+      .sidebar-pill {
+        width: 100%;
+        margin-bottom: 14px;
+      }
+
+      .sidebar-pill.active {
+        background: rgba(10, 132, 255, 0.18);
+      }
+
+      .sidebar-pill.short {
+        width: 68%;
+      }
+
+      .sidebar-divider {
+        height: 1px;
+        margin: 22px 0;
+        background: #d8e0eb;
+      }
+
+      .preview-main {
+        padding: 24px;
+      }
+
+      .preview-search {
+        height: 42px;
+        margin-bottom: 22px;
+      }
+
+      .bookmark-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        min-height: 96px;
+        margin-bottom: 18px;
+        padding: 18px;
+        border: 1px solid rgba(214, 221, 232, 0.88);
+        border-radius: 18px;
+        background: var(--surface-strong);
+      }
+
+      .bookmark-row strong,
+      .bookmark-grid strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 16px;
+      }
+
+      .bookmark-row small,
+      .bookmark-grid small {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .bookmark-icon,
+      .bookmark-grid span {
+        display: block;
+        flex: 0 0 auto;
+        width: 42px;
+        height: 42px;
+        border-radius: 13px;
+        background: linear-gradient(135deg, #0a84ff, #8ec5ff);
+      }
+
+      .bookmark-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .bookmark-grid article {
+        min-height: 146px;
+        padding: 16px;
+        border: 1px solid rgba(214, 221, 232, 0.88);
+        border-radius: 18px;
+        background: #fff;
+      }
+
+      .bookmark-grid span {
+        width: 34px;
+        height: 34px;
+        margin-bottom: 28px;
+        background: #e9f2ff;
+      }
+
+      .share-strip {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        margin-top: 18px;
+        padding: 16px 18px;
+        border-radius: 18px;
+        background: #111827;
+        color: #fff;
+        font-size: 14px;
+      }
+
+      .share-strip b {
+        color: #8ec5ff;
+      }
+
+      .proof-band,
+      .feature-section,
+      .privacy-section,
+      .landing-footer {
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      .proof-band {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1px;
+        overflow: hidden;
+        border: 1px solid var(--soft);
+        border-radius: 24px;
+        background: var(--soft);
+      }
+
+      .proof-band div {
+        min-height: 132px;
+        padding: 26px;
+        background: rgba(255, 255, 255, 0.82);
+      }
+
+      .proof-band strong {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 19px;
+      }
+
+      .proof-band span {
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .feature-section {
+        padding: 118px 0 40px;
+      }
+
+      .section-heading {
+        display: grid;
+        grid-template-columns: minmax(220px, 0.52fr) minmax(0, 1fr);
+        gap: 48px;
+        align-items: end;
+        margin-bottom: 42px;
+      }
+
+      h2 {
+        margin-bottom: 0;
+        font-size: clamp(36px, 5vw, 64px);
+        line-height: 1.04;
+        font-weight: 750;
+      }
+
+      .feature-list {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        border-top: 1px solid var(--soft);
+        border-left: 1px solid var(--soft);
+      }
+
+      .feature-list article {
+        min-height: 260px;
+        padding: 30px;
+        border-right: 1px solid var(--soft);
+        border-bottom: 1px solid var(--soft);
+        background: rgba(255, 255, 255, 0.5);
+      }
+
+      .feature-number {
+        display: inline-block;
+        margin-bottom: 46px;
+        color: var(--accent-dark);
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      h3 {
+        margin-bottom: 12px;
+        font-size: 22px;
+      }
+
+      .feature-list p,
+      .privacy-section p {
+        color: var(--muted);
+        line-height: 1.62;
+      }
+
+      .privacy-section {
+        display: grid;
+        grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1fr);
+        gap: 52px;
+        align-items: center;
+        margin-top: 70px;
+        padding: 48px;
+        border: 1px solid rgba(190, 201, 218, 0.72);
+        border-radius: 28px;
+        background: #fff;
+        box-shadow: 0 20px 70px rgba(55, 74, 105, 0.1);
+      }
+
+      .privacy-section p {
+        margin-bottom: 24px;
+        font-size: 17px;
+      }
+
+      .policy-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .landing-footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 44px 0 32px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .landing-footer nav {
+        display: flex;
+        gap: 18px;
+      }
+
+      .landing-footer a:hover {
+        color: var(--ink);
+      }
+
+      @media (max-width: 920px) {
+        .landing-header {
+          position: static;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .landing-nav {
+          width: 100%;
+          overflow-x: auto;
+        }
+
+        .hero,
+        .section-heading,
+        .privacy-section {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          min-height: auto;
+          padding-top: 34px;
+        }
+
+        .product-stage {
+          border-radius: 22px;
+        }
+
+        .workspace-preview {
+          grid-template-columns: 96px minmax(0, 1fr);
+        }
+
+        .bookmark-grid,
+        .proof-band,
+        .feature-list {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .landing-header,
+        .hero,
+        .proof-band,
+        .feature-section,
+        .privacy-section,
+        .landing-footer {
+          width: min(100% - 28px, 1180px);
+        }
+
+        h1 {
+          font-size: 48px;
+        }
+
+        .landing-nav a {
+          padding: 0 12px;
+        }
+
+        .workspace-preview {
+          grid-template-columns: 1fr;
+        }
+
+        .preview-sidebar {
+          display: none;
+        }
+
+        .bookmark-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .privacy-section {
+          padding: 28px;
+        }
+
+        .landing-footer {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body class="landing-page">
+    <header class="landing-header">
+      <a class="brand" href="https://navfinder.cn/" aria-label="Pocket Bookmarks home">
+        <img src='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"%3E%3Crect width="96" height="96" rx="22" fill="%230a84ff"/%3E%3Cpath d="M30 24h36a6 6 0 0 1 6 6v44L48 61 24 74V30a6 6 0 0 1 6-6z" fill="white"/%3E%3Ccircle cx="60" cy="37" r="8" fill="%230a84ff"/%3E%3C/svg%3E' alt="" />
+        <span>Pocket Bookmarks</span>
+      </a>
+      <nav class="landing-nav" aria-label="Primary navigation">
+        <a href="#features">Features</a>
+        <a href="#privacy">Privacy</a>
+        <a href="https://navfinder.cn/features">Overview</a>
+        <a href="https://navfinder.cn/login" class="nav-login">Sign in</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Pocket-sized order for a very large web</p>
+          <h1 id="hero-title">A quieter home for every link worth keeping.</h1>
+          <p class="hero-text">
+            Pocket Bookmarks is a personal bookmark manager for saving web pages,
+            organizing them with categories and tags, finding them fast, and sharing
+            selected collections only when you choose.
+          </p>
+          <div class="hero-actions">
+            <a href="https://navfinder.cn/login" class="primary-action">Sign in</a>
+            <a href="https://navfinder.cn/features" class="secondary-action">View features</a>
+          </div>
+        </div>
+
+        <div class="product-stage" aria-label="Pocket Bookmarks interface preview">
+          <div class="window-bar">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="workspace-preview">
+            <aside class="preview-sidebar">
+              <div class="sidebar-pill active"></div>
+              <div class="sidebar-pill"></div>
+              <div class="sidebar-pill short"></div>
+              <div class="sidebar-divider"></div>
+              <div class="sidebar-pill"></div>
+              <div class="sidebar-pill short"></div>
+            </aside>
+            <section class="preview-main">
+              <div class="preview-search"></div>
+              <div class="bookmark-row featured">
+                <span class="bookmark-icon"></span>
+                <div>
+                  <strong>Design systems</strong>
+                  <small>UI, research, references</small>
+                </div>
+              </div>
+              <div class="bookmark-grid">
+                <article>
+                  <span></span>
+                  <strong>AI tools</strong>
+                  <small>18 links</small>
+                </article>
+                <article>
+                  <span></span>
+                  <strong>Learning</strong>
+                  <small>26 links</small>
+                </article>
+                <article>
+                  <span></span>
+                  <strong>Workflows</strong>
+                  <small>12 links</small>
+                </article>
+              </div>
+              <div class="share-strip">
+                <span>Public share home</span>
+                <b>Selected only</b>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <section class="proof-band" aria-label="Product highlights">
+        <div>
+          <strong>Import</strong>
+          <span>Bring browser bookmarks into one place.</span>
+        </div>
+        <div>
+          <strong>Organize</strong>
+          <span>Use categories, tags, icons, and view modes.</span>
+        </div>
+        <div>
+          <strong>Share</strong>
+          <span>Publish only the collections you explicitly select.</span>
+        </div>
+      </section>
+
+      <section class="feature-section" id="features" aria-labelledby="features-title">
+        <div class="section-heading">
+          <p class="eyebrow">Core system</p>
+          <h2 id="features-title">Built for people who collect knowledge, not clutter.</h2>
+        </div>
+        <div class="feature-list">
+          <article>
+            <span class="feature-number">01</span>
+            <h3>Fast bookmark capture</h3>
+            <p>Save useful pages, import browser bookmarks, and keep the original title, URL, and context easy to scan.</p>
+          </article>
+          <article>
+            <span class="feature-number">02</span>
+            <h3>Categories and tags</h3>
+            <p>Shape your own navigation system with folders, tags, category icons, and filtered search for large collections.</p>
+          </article>
+          <article>
+            <span class="feature-number">03</span>
+            <h3>Multiple views</h3>
+            <p>Switch between list, grid, and tile-style browsing so quick lookup and visual review both feel natural.</p>
+          </article>
+          <article>
+            <span class="feature-number">04</span>
+            <h3>AI-assisted organization</h3>
+            <p>Use AI suggestions to recommend categories, tags, and icons when a collection starts to grow.</p>
+          </article>
+          <article>
+            <span class="feature-number">05</span>
+            <h3>Broken link checks</h3>
+            <p>Review unreachable bookmarks before they interrupt your next search or shared collection.</p>
+          </article>
+          <article>
+            <span class="feature-number">06</span>
+            <h3>Controlled public sharing</h3>
+            <p>Create a public share home or share selected categories while keeping private bookmarks out of view.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="privacy-section" id="privacy" aria-labelledby="privacy-title">
+        <div>
+          <p class="eyebrow">Trust and review</p>
+          <h2 id="privacy-title">Clear access. Clear policy. Clear ownership.</h2>
+        </div>
+        <p>
+          Pocket Bookmarks uses account login to keep your personal workspace private.
+          Public pages only show bookmark collections that you choose to publish.
+          Review how information is handled in the privacy policy.
+        </p>
+        <div class="policy-links">
+          <a href="https://navfinder.cn/privacy">Privacy Policy</a>
+          <a href="https://navfinder.cn/terms">Terms of Service</a>
+          <a href="mailto:510721297@qq.com">Contact</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="landing-footer">
+      <span>Copyright 2024-2026 Pocket Bookmarks. All rights reserved.</span>
+      <nav aria-label="Footer navigation">
+        <a href="https://navfinder.cn/privacy">Privacy</a>
+        <a href="https://navfinder.cn/terms">Terms</a>
+        <a href="https://navfinder.cn/login">Sign in</a>
+      </nav>
+    </footer>
+  </body>
+</html>
