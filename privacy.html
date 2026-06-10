@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookmark Manager - Privacy Policy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            color: #1a73e8;
+        }
+        h2 {
+            color: #1a73e8;
+            margin-top: 24px;
+        }
+        .permission {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pocket Bookmark Manager Extension Privacy Policy</h1>
+    <p><strong>Last Updated:</strong> 18/05/2024</p>
+
+    <h2>1. Data Collection & Usage</h2>
+    <p>This extension helps users manage browser bookmarks efficiently with encrypted data handling:</p>
+    <ul>
+        <li><strong>Bookmark Data</strong>: Integrated with our cloud-based bookmark system where data is primarily stored on secure servers, with partial caching locally for performance. All operations are synchronized between the browser and our cloud system.</li>
+        <li><strong>Account Credentials</strong>: Stored encrypted, visible only to the account owner</li>
+        <li><strong>Sharing Feature</strong>: Users can optionally share specific bookmarks without granting edit permissions</li>
+    </ul>
+
+    <h2>2. Permission Justifications</h2>
+    <div class="permission">
+        <h3>tabs Permission</h3>
+        <p>Gets current page URL for one-click bookmarking</p>
+    </div>
+    
+    <div class="permission">
+        <h3>storage Permission</h3>
+        <p>Stores user's bookmark categories and settings locally to enhance performance and user experience, while all primary data remains securely stored on cloud servers. Specifically:​​
+​Local Caching: Temporarily stores frequently accessed data (e.g., bookmark categories, UI preferences) for instant loading.
+​Cloud Sync: All critical data is securely synchronized with our cloud servers (HTTPS encrypted) to ensure reliability.
+​User Control: Users can clear local storage anytime via extension settings.</p>
+    </div>
+    
+    <div class="permission">
+        <h3>scripting Permission</h3>
+        <p>Dynamically executes scripts to interact with browser bookmark system for:
+        <ul>
+            <li>Reading/modifying bookmark data (add/delete/update)</li>
+            <li>Automating bookmark management actions</li>
+            <li>Bookmark group management and batch operations</li>
+            <li>Searching and filtering functionality</li>
+        </ul>
+        </p>
+    </div>
+    
+    <div class="permission">
+        <h3>contextMenus Permission</h3>
+        <p>Adds right-click menu option to save current page as bookmark</p>
+    </div>
+    
+    <div class="permission">
+        <h3>sidePanel Permission</h3>
+        <p>Provides quick-access bookmark sidebar</p>
+    </div>
+    
+    <div class="permission">
+        <h3>Host Permission</h3>
+        <p>Accesses and manages user's bookmark data locally</p>
+    </div>
+
+    <h2>3. Remote Code Usage</h2>
+    <p>To ensure compatibility with PC bookmark systems, this extension uses remote code:</p>
+    <ul>
+        <li>Loaded securely via HTTPS from trusted domain (https://navfinder.cn/)</li>
+        <li>Synchronizes bookmark categories and permission rules</li>
+        <li>Adapts dynamically to backend API changes</li>
+        <li>Offloads complex operations to remote Wasm modules for performance</li>
+    </ul>
+
+    <h2>4. Data Security</h2>
+    <p>All user data is encrypted with exclusive access:</p>
+    <ul>
+        <li>Only the owner can view their bookmarks</li>
+        <li>Modification and deletion restricted to owner</li>
+        <li>Optional sharing of specific bookmarks under user control</li>
+    </ul>
+
+    <h2>5. Contact Us</h2>
+    <p>For privacy-related inquiries: 510721297@qq.com</p>
+</body>
+</html>
